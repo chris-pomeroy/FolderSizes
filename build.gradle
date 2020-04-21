@@ -4,3 +4,26 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
+plugins {
+	id 'java'
+    id 'java-library'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'eclipse'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter() 
+}
+
+javafx {
+    version = "14"
+}
+
+dependencies {
+
+    testImplementation 'junit:junit:4.12' 
+}
