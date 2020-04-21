@@ -15,6 +15,10 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+application {
+    mainClassName = 'folderSizes.Main'
+}
+
 repositories {
     jcenter() 
 }
@@ -28,5 +32,3 @@ dependencies {
 
     testImplementation 'junit:junit:4.12' 
 }
-
-mainClassName = 'Main'
