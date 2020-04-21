@@ -21,9 +21,12 @@ repositories {
 
 javafx {
     version = "14"
+    modules = [ 'javafx.controls', 'javafx.fxml' ] 
 }
 
 dependencies {
 
     testImplementation 'junit:junit:4.12' 
 }
+
+mainClassName = 'Main'

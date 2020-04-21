@@ -40,8 +40,8 @@ public class Controller implements Initializable
         box.setOnAction(this::onDropMenu);
         try
         {
-            if (Main.getParam() != null)
-                fileTree = new FileTree(Paths.get(Main.getParam()));
+            if (Loader.getParam() != null)
+                fileTree = new FileTree(Paths.get(Loader.getParam()));
             else
                 fileTree = new FileTree(new DirectoryChooser().showDialog(new Popup()).toPath());
 //                fileTree = new FileTree(Paths.get("C:\\Users\\Chris\\Documents")); // Default for testing
