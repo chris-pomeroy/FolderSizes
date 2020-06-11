@@ -23,8 +23,8 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class Controller implements Initializable 
-{
+public class Controller implements Initializable {
+	
     @FXML
     private TreeView<String> treeView;
     @FXML
@@ -33,21 +33,19 @@ public class Controller implements Initializable
     private FileTree fileTree;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
+    	
         box.setItems(FXCollections.observableArrayList(SortOption.values()));
         box.setValue(SortOption.DEFAULT);
         box.setOnAction(this::onDropMenu);
-        try
-        {
+        
+        try {
             if (Loader.getParam() != null)
                 fileTree = new FileTree(Paths.get(Loader.getParam()));
             else
                 fileTree = new FileTree(new DirectoryChooser().showDialog(new Popup()).toPath());
-//                fileTree = new FileTree(Paths.get("C:\\Users\\Chris\\Documents")); // Default for testing
         }
-        catch (IOException e) 
-        { 
+        catch (IOException e) { 
             Alert error = new Alert(AlertType.ERROR);
             error.setContentText("Error reading " + e.getMessage());
             error.setHeaderText("");
@@ -57,16 +55,14 @@ public class Controller implements Initializable
         treeView.getTreeItem(0).setExpanded(true);
     }   
     
-    private void onDropMenu(ActionEvent e)
-    {
+    private void onDropMenu(ActionEvent e) {
         fileTree.sortBy(box.getValue());
         treeView.setRoot(fileTree.toTreeItem());
         treeView.getTreeItem(0).setExpanded(true);
     }
 
     @FXML
-    private void onKey(KeyEvent event)
-    {
+    private void onKey(KeyEvent event) {
         Stage stage = (Stage) box.getScene().getWindow();
         if (event.getCode().equals(KeyCode.ESCAPE))
             stage.close();

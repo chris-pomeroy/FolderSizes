@@ -18,21 +18,20 @@ import static java.lang.Math.*;
  * 
  * Also calculates the sizes for every file and directory in the tree.
  */
-public final class FileTree
-{
+public final class FileTree {
+	
     private final Path file;
     private final long size;
     private final List<FileTree> children = new LinkedList<>();
         
-    public FileTree(Path file) throws IOException
-    {
+    public FileTree(Path file) throws IOException {
+    	
         this.file = file;
-        if (Files.isReadable(file) && Files.isDirectory(file, LinkOption.NOFOLLOW_LINKS))
-        {
+        if (Files.isReadable(file) && Files.isDirectory(file, LinkOption.NOFOLLOW_LINKS)) {
+        	
             DirectoryStream<Path> dir = Files.newDirectoryStream(file);
             long size = 0;
-            for (Path p : dir)
-            {
+            for (Path p : dir) {
                 FileTree child = new FileTree(p);
                 this.children.add(child);
                 size += child.size;
@@ -49,15 +48,13 @@ public final class FileTree
      * 
      * @return A TreeItem of Strings representing the tree
      */
-    public TreeItem<String> toTreeItem()
-    {
+    public TreeItem<String> toTreeItem() {
         TreeItem<String> tree = new TreeItem<>(this.toString());
         children.forEach(f -> tree.getChildren().add(f.toTreeItem()));
         return tree;
     }
         
-    public void sortBy(SortOption option)
-    {
+    public void sortBy(SortOption option) {
         switch (option)
         {
             case NAME: children.sort((f1, f2) -> f1.file.compareTo(f2.file)); break;
@@ -74,8 +71,7 @@ public final class FileTree
      * @return The String representation.
     */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return file.getFileName() + ": " + this.sizeAsString();
     }
 
@@ -85,13 +81,11 @@ public final class FileTree
      * 
      * @return String representation of the file size e.g. 3.2GB
      */
-    private String sizeAsString()
-    {
+    private String sizeAsString() {
         int exponent = (int)(log(size) / log(1024));
         double roundedDouble = round(size/ pow(1024, exponent) * 100) / 100.0;
         String magnitude;
-        switch (exponent)
-        {
+        switch (exponent) {
             default : magnitude = "bytes"; break;
             case 1: magnitude = "KB"; break;
             case 2: magnitude = "MB"; break;
